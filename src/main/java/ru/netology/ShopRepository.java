@@ -45,10 +45,11 @@ public class ShopRepository {
     public void remove(int id) {
         Product[] tmp = new Product[products.length - 1];
         int copyToIndex = 0;
+
+        if (findById(id) == null) {
+            throw new NotFoundException(id);}
+
         for (Product product : products) {
-            if (findById(id) == null) {
-                throw new NotFoundException(id);
-            }
             if (product.getId() != id) {
                 tmp[copyToIndex] = product;
                 copyToIndex++;
